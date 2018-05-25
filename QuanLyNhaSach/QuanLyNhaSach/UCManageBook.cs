@@ -30,15 +30,95 @@ namespace QuanLyNhaSach
                     dtgvManageBook.Rows[i].Cells["STT"].Value = i + 1;
                 }
             };
+
+            LoadListCategory();
         }
-
-
+        public void LoadListCategory()
+        {
+            cbCategory.DataSource = CategoryBookDAO.Instance.GetListCategory();
+            cbCategory.DisplayMember = "name";
+        }
         public void LoadListBook()
         {
             dtgvManageBook.DataSource = BookDAO.Instance.LoadListBook();
             for (int i = 0; i < dtgvManageBook.Rows.Count; i++)
             {
                 dtgvManageBook.Rows[i].Cells["STT"].Value = i + 1;
+            }
+        }
+        public void SearchBook()
+        {
+            dtgvManageBook.DataSource = BookDAO.Instance.LoadListBook();
+            if (txbBookName.Text != "")
+            {
+                List<Book> list = BookDAO.Instance.SearchBookByName(txbBookName.Text);
+                for (int i = 0; i < dtgvManageBook.RowCount; i++)
+                {
+                    int j = 0;
+                    for (; j < list.Count; j++)
+                    {
+                        if (dtgvManageBook.Rows[i].Cells["name"].Value.ToString() == list[j].Name)
+                            break;
+                    }
+                    if (j == list.Count)
+                    {
+                        dtgvManageBook.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (ckbCategory.Checked == true)
+            {
+                for (int i = 0; i < dtgvManageBook.RowCount; i++)
+                {
+                    if (dtgvManageBook.Rows[i].Cells["nameCategory"].Value.ToString() != (cbCategory.SelectedItem as CategoryBook).Name)
+                    {
+                        dtgvManageBook.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (txbAuthor.Text != "")
+            {
+                List<Book> list = BookDAO.Instance.SearchBookByAuthor(txbAuthor.Text);
+                for (int i = 0; i < dtgvManageBook.RowCount; i++)
+                {
+                    int j = 0;
+                    for (; j < list.Count; j++)
+                    {
+                        if (dtgvManageBook.Rows[i].Cells["author"].Value.ToString() == list[j].Author)
+                            break;
+                    }
+                    if (j == list.Count)
+                    {
+                        dtgvManageBook.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (ckbCount.Checked == true)
+            {
+                for (int i = 0; i < dtgvManageBook.RowCount; i++)
+                {
+                    if ((int)dtgvManageBook.Rows[i].Cells["count"].Value < (int)nmCountFrom.Value ||
+                        (int)dtgvManageBook.Rows[i].Cells["count"].Value > (int)nmCountTo.Value)
+                    {
+                        dtgvManageBook.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (ckbPrice.Checked == true)
+            {
+                for (int i = 0; i < dtgvManageBook.RowCount; i++)
+                {
+                    if ((float)Double.Parse(dtgvManageBook.Rows[i].Cells["priceIn"].Value.ToString()) < (int)nmPriceFrom.Value ||
+                        (float)Double.Parse(dtgvManageBook.Rows[i].Cells["priceIn"].Value.ToString()) > (int)nmPriceTo.Value)
+                    {
+                        dtgvManageBook.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
             }
         }
         public bool RemoveBookByBookID(int id)
@@ -114,28 +194,6 @@ namespace QuanLyNhaSach
                     MessageBox.Show("Bạn chưa chọn sách ");
             }
             catch { MessageBox.Show("Xóa không thành công !"); }
-}
-        private void pbSearchBook_Click(object sender, EventArgs e)
-        {
-            LoadListBook();
-            if (txbSearchBook.Text != "")
-            {
-                List<Book> list = BookDAO.Instance.SearchBookByName(txbSearchBook.Text);
-                for (int i = 0; i < dtgvManageBook.RowCount; i++)
-                {
-                    int j = 0;
-                    for (; j < list.Count; j++)
-                    {
-                        if (dtgvManageBook.Rows[i].Cells["nameBook"].Value.ToString() == list[j].Name)
-                            break;
-                    }
-                    if (j == list.Count)
-                    {
-                        dtgvManageBook.Rows.RemoveAt(i);
-                        i--;
-                    }
-                }
-            }
         }
         private void pbHistoryImport_Click(object sender, EventArgs e)
         {
@@ -143,7 +201,43 @@ namespace QuanLyNhaSach
             f.ShowDialog();
 
         }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchBook();
+        }
+        private void ckbCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            cbCategory.Enabled = ckbCategory.Checked == true;
 
+            if (ckbCategory.Checked == false)
+                SearchBook();
+        }
+        private void ckbCount_CheckedChanged(object sender, EventArgs e)
+        {
+            nmCountFrom.Enabled = ckbCount.Checked == true;
+            nmCountTo.Enabled = ckbCount.Checked == true;
+
+            if (ckbCount.Checked == false)
+                SearchBook();
+        }
+        private void ckbPrice_CheckedChanged(object sender, EventArgs e)
+        {
+            nmPriceFrom.Enabled = ckbPrice.Checked == true;
+            nmPriceTo.Enabled = ckbPrice.Checked == true;
+
+            if (ckbPrice.Checked == false)
+                SearchBook();
+        }
+        private void txbBookName_TextChanged(object sender, EventArgs e)
+        {
+            if (txbBookName.Text == "")
+                SearchBook();
+        }
+        private void txbAuthor_TextChanged(object sender, EventArgs e)
+        {
+            if (txbAuthor.Text == "")
+                SearchBook();
+        }
         #endregion
     }
 }

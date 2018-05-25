@@ -208,18 +208,6 @@
     <Compile Include="UCReportOwe.designer.cs">
       <DependentUpon>UCReportOwe.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCSearchBook.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCSearchBook.designer.cs">
-      <DependentUpon>UCSearchBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCSearchCustomer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCSearchCustomer.designer.cs">
-      <DependentUpon>UCSearchCustomer.cs</DependentUpon>
-    </Compile>
     <Compile Include="UCSystem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -300,12 +288,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCReportOwe.resx">
       <DependentUpon>UCReportOwe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCSearchBook.resx">
-      <DependentUpon>UCSearchBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCSearchCustomer.resx">
-      <DependentUpon>UCSearchCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCSystem.resx">
       <DependentUpon>UCSystem.cs</DependentUpon>

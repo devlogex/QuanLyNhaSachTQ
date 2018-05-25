@@ -47,9 +47,6 @@
             this.báoCáoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.báoCáoTồnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.báoCáoNợToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.traCứuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.traCứuSáchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.traCứuKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hệThốngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
@@ -132,12 +129,11 @@
             this.quảnLýToolStripMenuItem,
             this.kinhDoanhToolStripMenuItem,
             this.báoCáoToolStripMenuItem,
-            this.traCứuToolStripMenuItem,
             this.hệThốngToolStripMenuItem,
             this.adminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(51, 3);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(474, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(412, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -249,33 +245,6 @@
             this.báoCáoNợToolStripMenuItem.Text = "Báo cáo nợ";
             this.báoCáoNợToolStripMenuItem.Click += new System.EventHandler(this.báoCáoNợToolStripMenuItem_Click);
             // 
-            // traCứuToolStripMenuItem
-            // 
-            this.traCứuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.traCứuSáchToolStripMenuItem,
-            this.traCứuKháchHàngToolStripMenuItem});
-            this.traCứuToolStripMenuItem.Font = new System.Drawing.Font("Cambria", 9.75F);
-            this.traCứuToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.traCứuToolStripMenuItem.Name = "traCứuToolStripMenuItem";
-            this.traCứuToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.traCứuToolStripMenuItem.Text = "Tra cứu";
-            // 
-            // traCứuSáchToolStripMenuItem
-            // 
-            this.traCứuSáchToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
-            this.traCứuSáchToolStripMenuItem.Name = "traCứuSáchToolStripMenuItem";
-            this.traCứuSáchToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.traCứuSáchToolStripMenuItem.Text = "Tra cứu sách";
-            this.traCứuSáchToolStripMenuItem.Click += new System.EventHandler(this.traCứuSáchToolStripMenuItem_Click);
-            // 
-            // traCứuKháchHàngToolStripMenuItem
-            // 
-            this.traCứuKháchHàngToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
-            this.traCứuKháchHàngToolStripMenuItem.Name = "traCứuKháchHàngToolStripMenuItem";
-            this.traCứuKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.traCứuKháchHàngToolStripMenuItem.Text = "Tra cứu khách hàng";
-            this.traCứuKháchHàngToolStripMenuItem.Click += new System.EventHandler(this.traCứuKháchHàngToolStripMenuItem_Click);
-            // 
             // hệThốngToolStripMenuItem
             // 
             this.hệThốngToolStripMenuItem.Font = new System.Drawing.Font("Cambria", 9.75F);
@@ -302,7 +271,7 @@
             this.itemDisplayName});
             this.menuStrip2.Location = new System.Drawing.Point(856, 3);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(201, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(81, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -322,7 +291,7 @@
             // 
             this.itemAccount.ForeColor = System.Drawing.Color.Blue;
             this.itemAccount.Name = "itemAccount";
-            this.itemAccount.Size = new System.Drawing.Size(180, 22);
+            this.itemAccount.Size = new System.Drawing.Size(131, 22);
             this.itemAccount.Text = "Tài khoản";
             this.itemAccount.Click += new System.EventHandler(this.itemAccount_Click);
             // 
@@ -330,7 +299,7 @@
             // 
             this.itemLogout.ForeColor = System.Drawing.Color.Blue;
             this.itemLogout.Name = "itemLogout";
-            this.itemLogout.Size = new System.Drawing.Size(180, 22);
+            this.itemLogout.Size = new System.Drawing.Size(131, 22);
             this.itemLogout.Text = "Đăng xuất";
             this.itemLogout.Click += new System.EventHandler(this.itemLogout_Click);
             // 
@@ -338,7 +307,7 @@
             // 
             this.itemExit.ForeColor = System.Drawing.Color.Blue;
             this.itemExit.Name = "itemExit";
-            this.itemExit.Size = new System.Drawing.Size(180, 22);
+            this.itemExit.Size = new System.Drawing.Size(131, 22);
             this.itemExit.Text = "Thoát";
             this.itemExit.Click += new System.EventHandler(this.itemExit_Click);
             // 
@@ -399,9 +368,6 @@
         private System.Windows.Forms.ToolStripMenuItem báoCáoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem báoCáoTồnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem báoCáoNợToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem traCứuToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem traCứuSáchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem traCứuKháchHàngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hệThốngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lậpPhiếuNhậpSáchToolStripMenuItem;

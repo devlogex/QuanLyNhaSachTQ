@@ -44,6 +44,58 @@ namespace QuanLyNhaSach
         {
             return CustomerDAO.Instance.RemoveCustomerByCustomerID(id);
         }
+        public void SearchCustomer()
+        {
+            customerList.DataSource = CustomerDAO.Instance.GetListCustomer();
+            if (txbCustomerName.Text != "")
+            {
+                List<Customer> list = CustomerDAO.Instance.SearchCustomerByName(txbCustomerName.Text);
+                for (int i = 0; i < dtgvManageCustomer.RowCount; i++)
+                {
+                    int j = 0;
+                    for (; j < list.Count; j++)
+                    {
+                        if (dtgvManageCustomer.Rows[i].Cells["name"].Value.ToString() == list[j].Name)
+                            break;
+                    }
+                    if (j == list.Count)
+                    {
+                        dtgvManageCustomer.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (txbPhoneNumber.Text != "")
+            {
+                List<Customer> list = CustomerDAO.Instance.SearchCustomerByPhoneNumber(txbPhoneNumber.Text);
+                for (int i = 0; i < dtgvManageCustomer.RowCount; i++)
+                {
+                    int j = 0;
+                    for (; j < list.Count; j++)
+                    {
+                        if (dtgvManageCustomer.Rows[i].Cells["phoneNumber"].Value.ToString() == list[j].Phonenumber)
+                            break;
+                    }
+                    if (j == list.Count)
+                    {
+                        dtgvManageCustomer.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            if (ckbOwe.Checked == true)
+            {
+                for (int i = 0; i < dtgvManageCustomer.RowCount; i++)
+                {
+                    if ((float)Double.Parse(dtgvManageCustomer.Rows[i].Cells["owe"].Value.ToString()) < (int)nmOweFrom.Value ||
+                        (float)Double.Parse(dtgvManageCustomer.Rows[i].Cells["owe"].Value.ToString()) > (int)nmOweTo.Value)
+                    {
+                        dtgvManageCustomer.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Event
@@ -110,32 +162,36 @@ namespace QuanLyNhaSach
                 MessageBox.Show("Xóa không thành công!");
             }
         }
-        private void pbSearchCustomer_Click(object sender, EventArgs e)
-        {
-            LoadListCustomer();
-            if (txbSearchCustomer.Text != "")
-            {
-                List<Customer> list = CustomerDAO.Instance.SearchCustomerByName(txbSearchCustomer.Text);
-                for (int i = 0; i < dtgvManageCustomer.RowCount; i++)
-                {
-                    int j = 0;
-                    for (; j < list.Count; j++)
-                    {
-                        if (dtgvManageCustomer.Rows[i].Cells["name"].Value.ToString() == list[j].Name)
-                            break;
-                    }
-                    if (j == list.Count)
-                    {
-                        dtgvManageCustomer.Rows.RemoveAt(i);
-                        i--;
-                    }
-                }
-            }
-        }
         private void pbHistoryBill_Click(object sender, EventArgs e)
         {
             FListBill f = new FListBill();
             f.ShowDialog();
+        }
+
+        private void ckbOwe_CheckedChanged(object sender, EventArgs e)
+        {
+            nmOweFrom.Enabled = ckbOwe.Checked == true;
+            nmOweTo.Enabled = ckbOwe.Checked == true;
+
+            if (ckbOwe.Checked == false)
+                SearchCustomer();
+        }
+
+        private void txbCustomerName_TextChanged(object sender, EventArgs e)
+        {
+            if (txbCustomerName.Text == "")
+                SearchCustomer();
+        }
+
+        private void txbPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (txbPhoneNumber.Text == "")
+                SearchCustomer();
+        }
+
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            SearchCustomer();
         }
         #endregion
 

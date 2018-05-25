@@ -162,23 +162,6 @@ namespace QuanLyNhaSach
             pnUserControl.Controls.Add(uc);
             uc.BringToFront();
         }
-
-        private void traCứuSáchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCSearchBook uc = new UCSearchBook();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-
-        private void traCứuKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCSearchCustomer uc = new UCSearchCustomer();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-
         private void hệThốngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pnUserControl.Controls.Clear();

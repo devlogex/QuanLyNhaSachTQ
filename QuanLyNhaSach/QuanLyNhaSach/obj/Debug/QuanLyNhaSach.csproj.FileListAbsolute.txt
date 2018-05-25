@@ -59,8 +59,6 @@ C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCManageCustomer.resources
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCReportCount.resources
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCReportOwe.resources
-C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCSearchBook.resources
-C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCSearchCustomer.resources
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.UCSystem.resources
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.csproj.GenerateResource.cache
 C:\Users\TND16\Documents\GitHub\QuanLyNhaSachTQ\QuanLyNhaSach\QuanLyNhaSach\obj\Debug\QuanLyNhaSach.csproj.CoreCompileInputs.cache
