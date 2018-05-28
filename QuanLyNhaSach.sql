@@ -779,7 +779,8 @@ CREATE PROC USP_LoadListBillInfo
 AS
 BEGIN
 	SELECT b.id as idBook,b.name as nameBook,c.name as category,b.author as author, bi.count as count,bi.priceOut as priceOut
-	FROM BillInfo bi,Book b,CategoryBook c
+	FROM BillInfo bi,Book b,CategoryBook     DateTime date = dtpkDateIn.Value;
+            SaveImportBook(date);
 	WHERE bi.idBill=@id AND bi.idBook=b.id AND b.idCategory=c.id
 END
 GO
