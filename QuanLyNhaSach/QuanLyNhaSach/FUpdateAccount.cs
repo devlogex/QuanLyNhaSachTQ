@@ -56,8 +56,7 @@ namespace QuanLyNhaSach
             string userName = txbUserName.Text;
             string passWord = txbPassWord.Text;
             string displayName = txbDisplayName.Text;
-            int type = this.Acc.Type;
-            if (AccountDAO.Instance.UpdateAccountByUserName(userName, displayName, passWord, type))
+            if (AccountDAO.Instance.UpdateAccountByUserName(userName, displayName, passWord))
             {
                 MessageBox.Show("Cập nhật tài khoản thành công !");
                 if (updateListAccount != null)

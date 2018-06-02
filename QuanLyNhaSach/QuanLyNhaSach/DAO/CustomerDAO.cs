@@ -48,33 +48,23 @@ namespace QuanLyNhaSach.DAO
 
             return customer;
         }
+        public int GetNewIDCustomer()
+        {
+            int id;
+            if (Int32.TryParse(DataProvider.Instance.ExecuteQuery("EXEC USP_GetNewIDCustomer").Rows[0][0].ToString(), out id))
+            {
+                return id;
+            }
+            else
+                return 1;
+        }
         public List<Customer> SearchCustomerByName(string name)
         {
             List<Customer> list = new List<Customer>();
-            DataTable data = DataProvider.Instance.ExecuteQuery(String.Format("SELECT * FROM Customer WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name));
+            DataTable data = DataProvider.Instance.ExecuteQuery(String.Format("SELECT MaKhachHang as id,TenKhachHang as name,DiaChi as address, SoDienThoai as phoneNumber, Email as email, SoTienNo as owe FROM KHACHHANG WHERE dbo.fuConvertToUnsign1(TenKhachHang) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name));
             foreach (DataRow item in data.Rows)
             {
                 list.Add(new Customer(item));
-            }
-            return list;
-        }
-        public List<Customer> SearchCustomerByPhoneNumber(string phoneNumber)
-        {
-            List<Customer> list = new List<Customer>();
-            DataTable data = DataProvider.Instance.ExecuteQuery(String.Format("SELECT * FROM Customer WHERE phoneNumber='"+phoneNumber+"'"));
-            foreach (DataRow item in data.Rows)
-            {
-                list.Add(new Customer(item));
-            }
-            return list;
-        }
-        public List<int> GetListCustomerID()
-        {
-            List<int> list = new List<int>();
-            DataTable data = DataProvider.Instance.ExecuteQuery("EXEC USP_GetListCustomerID");
-            foreach (DataRow item in data.Rows)
-            {
-                list.Add((int)item[0]);
             }
             return list;
         }

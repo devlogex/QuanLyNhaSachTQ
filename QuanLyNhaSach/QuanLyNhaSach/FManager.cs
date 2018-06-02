@@ -17,190 +17,106 @@ namespace QuanLyNhaSach
         private Account acc;
 
         public Account Acc { get => acc; set => acc = value; }
-
         public FManager(Account acc)
         {
-            InitializeComponent();
+        InitializeComponent();
 
             this.Acc = acc;
             LoadForm();
         }
-
         public void LoadForm()
         {
             itemDisplayName.Text = this.Acc.DisplayName;
-
-            pnUserControl.Controls.Clear();
-            UCDefault uc = new UCDefault();
-            uc.MyEvent += Uc_MyEvent;
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            if (this.Acc.Type == 1)
+                msAccount.Items.Remove(itemAdmin);
         }
 
-        private void Uc_MyEvent(object sender, EventLoadForm e)
+        private void lbManageCategoryAndAuthor_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            switch(e.NameEvent)
-            {
-                case "pbAddBook_Click":
-                    {
-                        FAddBook f = new FAddBook();
-                        f.ShowDialog();
-                        break;
-                    }
-                case "pbAddCustomer_Click":
-                    {
-                        FAddCustomer f = new FAddCustomer();
-                        f.ShowDialog();
-                        break;
-                    }
-                case "pbAddCategory_Click":
-                    {
-                        FAddCategory f = new FAddCategory();
-                        f.ShowDialog();
-                        break;
-                    }
-                case "pbAddImportBook_Click":
-                    {
-                        pnUserControl.Controls.Clear();
-                        UCImportBook uc = new UCImportBook();
-                        pnUserControl.Controls.Add(uc);
-                        uc.BringToFront();
-                        break;
-                    }
-                case "pbAddBill_Click":
-                    {
-                        pnUserControl.Controls.Clear();
-                        UCBill uc = new UCBill();
-                        pnUserControl.Controls.Add(uc);
-                        uc.BringToFront();
-                        break;
-                    }
-                case "pbAddCollectMoney_Click":
-                    {
-                        pnUserControl.Controls.Clear();
-                        UCCollectMoney uc = new UCCollectMoney();
-                        pnUserControl.Controls.Add(uc);
-                        uc.BringToFront();
-                        break;
-                    }
-            }
+            FManageCategoryAndAuthor f = new FManageCategoryAndAuthor();
+            f.ShowDialog();
         }
 
-        #region Event
-        private void pbExit_Click(object sender, EventArgs e)
+        private void lbManageBookTitle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Application.Exit();
+            FManageBookTitle f = new FManageBookTitle();
+            f.ShowDialog();
         }
 
-        private void quảnLýSáchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbManageCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCManageBook uc = new UCManageBook();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCManageCustomer uc = new UCManageCustomer();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-        private void quảnLýThểLoạiSáchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCManageCategory uc = new UCManageCategory();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FManageCustomer f = new FManageCustomer();
+            f.ShowDialog();
         }
 
-
-
-        private void trangChủToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbImportBook_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCDefault uc = new UCDefault();
-            uc.MyEvent += Uc_MyEvent;
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-        private void lậpPhiếuNhậpSáchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCImportBook uc = new UCImportBook();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-        private void lậpHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCBill uc = new UCBill();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FImportBook f = new FImportBook();
+            f.ShowDialog();
         }
 
-        private void lậpPhiếuThuTiềnToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbBill_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCCollectMoney uc = new UCCollectMoney();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FBill f = new FBill();
+            f.ShowDialog();
         }
 
-        private void báoCáoTồnToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbCollectMoney_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCReportCount uc = new UCReportCount();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FReceipt f = new FReceipt();
+            f.ShowDialog();
         }
 
-        private void báoCáoNợToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbReportCount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCReportOwe uc = new UCReportOwe();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
-        }
-        private void hệThốngToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pnUserControl.Controls.Clear();
-            UCSystem uc = new UCSystem();
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FReportBook f = new FReportBook();
+            f.ShowDialog();
         }
 
-        private void adminToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lbReportOwe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnUserControl.Controls.Clear();
-            UCAdmin uc = new UCAdmin(this.Acc);
-            pnUserControl.Controls.Add(uc);
-            uc.BringToFront();
+            FReportOwe f = new FReportOwe();
+            f.ShowDialog();
+        }
+
+        private void itemLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void lbSystem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FSystem f = new FSystem();
+            f.ShowDialog();
+        }
+
+        private void lbSearchBook_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FSearchBook f = new FSearchBook();
+            f.ShowDialog();
+        }
+
+        private void lbSearchCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FSearchCustomer f = new FSearchCustomer();
+            f.ShowDialog();
         }
 
         private void itemAccount_Click(object sender, EventArgs e)
         {
             FUpdateAccount f = new FUpdateAccount(this.Acc);
             f.UpdateListAccount += delegate (object _sender, EventArgs _e)
-            {
-                Account acc = AccountDAO.Instance.GetAccountByUserName(this.Acc.UserName);
-                this.Acc = acc;
-                itemDisplayName.Text = this.Acc.DisplayName;
-            };
+              {
+                  this.Acc = AccountDAO.Instance.GetAccountByUserName(this.Acc.UserName);
+                  itemDisplayName.Text = this.Acc.DisplayName;
+              };
             f.ShowDialog();
         }
 
-        private void itemLogout_Click(object sender, EventArgs e)
+        private void itemAdmin_Click(object sender, EventArgs e)
         {
-            this.Close();
+            FAccount f = new FAccount();
+            f.ShowDialog();
         }
-
-        private void itemExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        #endregion
-
-
     }
 }

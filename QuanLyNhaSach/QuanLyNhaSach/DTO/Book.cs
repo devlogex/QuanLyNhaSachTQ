@@ -11,35 +11,35 @@ namespace QuanLyNhaSach.DTO
     {
         private int iD;
         private string name;
-        private int iDCategory;
-        private string author;
+        private int idBookTitle;
+        private string publishCompany;
+        private string publishYear;
+        private CategoryBook category;
+        private List<Author> authors;
         private float priceIn;
         private int count;
 
         public int ID { get => iD; set => iD = value; }
         public string Name { get => name; set => name = value; }
-        public int IDCategory { get => iDCategory; set => iDCategory = value; }
-        public string Author { get => author; set => author = value; }
-        public int Count { get => count; set => count = value; }
+        public int IdBookTitle { get => idBookTitle; set => idBookTitle = value; }
+        public string PublishCompany { get => publishCompany; set => publishCompany = value; }
+        public string PublishYear { get => publishYear; set => publishYear = value; }
+        public CategoryBook Category { get => category; set => category = value; }
         public float PriceIn { get => priceIn; set => priceIn = value; }
+        public int Count { get => count; set => count = value; }
+        public List<Author> Authors { get => authors; set => authors = value; }
 
-        public Book(int id,string name,int idCategory,string author,int price,int count)
+        public Book(DataRow row,CategoryBook category,List<Author>authors)
         {
-            this.ID = id;
-            this.Name = name;
-            this.IDCategory = idCategory;
-            this.Author = author;
-            this.PriceIn = price;
-            this.Count = count;
-        }
-        public Book(DataRow row)
-        {
-            this.ID = (int)row["id"];
+            this.ID = Int32.Parse(row["id"].ToString());
             this.Name = row["name"].ToString();
-            this.IDCategory = (int)row["idCategory"];
-            this.Author = row["author"].ToString();
             this.PriceIn = (float)Double.Parse(row["priceIn"].ToString());
-            this.Count = (int)row["count"];
+            this.Count = Int32.Parse(row["count"].ToString());
+            this.IdBookTitle = Int32.Parse(row["idBookTitle"].ToString());
+            this.PublishCompany = row["publishCompany"].ToString();
+            this.PublishYear = row["publishYear"].ToString();
+            this.Category = category;
+            this.Authors = authors;
         }
 
     }

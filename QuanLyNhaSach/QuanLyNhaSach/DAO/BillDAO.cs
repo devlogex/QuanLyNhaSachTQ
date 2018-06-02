@@ -19,11 +19,22 @@ namespace QuanLyNhaSach.DAO
         }
         private BillDAO() { }
 
-        public bool InsertBill(Customer customer,DateTime date,float value,float owe)
+        public int GetNewIDBill()
         {
-            return DataProvider.Instance.ExecuteNonQuery("EXEC USP_InsertBillIntoDatabase @idCustomer , @date , @value , @owe", new object[] { customer.ID,date,value , owe }) > 0;
+            int id;
+            if (Int32.TryParse(DataProvider.Instance.ExecuteQuery("EXEC USP_GetNewIDBill").Rows[0][0].ToString(), out id))
+            {
+                return id;
+            }
+            else
+                return 1;
         }
-        public List<Bill> GetListBillByTime(int month,int year)
+
+        public bool InsertBill(Customer customer, DateTime date, float totalMoney, float receiveMoney,float moneyOwe)
+        {
+            return DataProvider.Instance.ExecuteNonQuery("EXEC USP_InsertBillIntoDatabase @idCustomer , @date , @totalMoney , @receiveMoney , @moneyOwe", new object[] { customer.ID, date, totalMoney, receiveMoney,moneyOwe }) > 0;
+        }
+        public List<Bill> GetListBillByTime(int month, int year)
         {
             List<Bill> list = new List<Bill>();
             DataTable data = DataProvider.Instance.ExecuteQuery("EXEC USP_GetListBillByTime @month , @year", new object[] { month, year });
@@ -33,9 +44,9 @@ namespace QuanLyNhaSach.DAO
             }
             return list;
         }
-        public DataTable GetListBill()
+        public DataTable GetListBillByCustomerID(int id)
         {
-            return DataProvider.Instance.ExecuteQuery("EXEC USP_GetListBill");
+            return DataProvider.Instance.ExecuteQuery("EXEC USP_GetListBillByCustomerID @id",new object[] { id });
         }
     }
 }

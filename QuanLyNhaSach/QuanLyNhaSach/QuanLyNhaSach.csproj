@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{188E93C6-5CCE-45DE-A292-83060E1DA0CA}</ProjectGuid>
+    <ProjectGuid>{9E5D7581-8DFC-4ECF-B89A-F6A9D6481029}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>QuanLyNhaSach</RootNamespace>
     <AssemblyName>QuanLyNhaSach</AssemblyName>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,8 +32,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>.\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>.\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>.\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra">
+      <HintPath>.\itextsharp.xtra.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,44 +64,57 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\BookTitleDAO.cs" />
     <Compile Include="DAO\CategoryBookDAO.cs" />
     <Compile Include="DAO\CollectMoneyDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\ExportDataToPDF.cs" />
     <Compile Include="DAO\ImportBookDAO.cs" />
     <Compile Include="DAO\ImportBookInfoDAO.cs" />
     <Compile Include="DAO\ReportCountDAO.cs" />
-    <Compile Include="DAO\ReportCountInfoDAO.cs" />
     <Compile Include="DAO\ReportOweDAO.cs" />
-    <Compile Include="DAO\ReportOweInfoDAO.cs" />
     <Compile Include="DAO\ThamSoDAO.cs" />
     <Compile Include="DTO\Account.cs" />
+    <Compile Include="DTO\Author.cs" />
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\Book.cs" />
+    <Compile Include="DTO\BookTitle.cs" />
     <Compile Include="DTO\CategoryBook.cs" />
     <Compile Include="DTO\CollectMoney.cs" />
     <Compile Include="DTO\Customer.cs" />
     <Compile Include="DTO\ImportBook.cs" />
     <Compile Include="DTO\ImportBookInfo.cs" />
     <Compile Include="DTO\ReportCount.cs" />
-    <Compile Include="DTO\ReportCountInfo.cs" />
     <Compile Include="DTO\ReportOwe.cs" />
-    <Compile Include="DTO\ReportOweInfo.cs" />
+    <Compile Include="FAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAccount.Designer.cs">
+      <DependentUpon>FAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="FAddAccount.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FAddAccount.designer.cs">
       <DependentUpon>FAddAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="FAddBook.cs">
+    <Compile Include="FAddAuthor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAddBook.designer.cs">
-      <DependentUpon>FAddBook.cs</DependentUpon>
+    <Compile Include="FAddAuthor.designer.cs">
+      <DependentUpon>FAddAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FAddBookTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAddBookTitle.designer.cs">
+      <DependentUpon>FAddBookTitle.cs</DependentUpon>
     </Compile>
     <Compile Include="FAddCategory.cs">
       <SubType>Form</SubType>
@@ -98,17 +128,17 @@
     <Compile Include="FAddCustomer.designer.cs">
       <DependentUpon>FAddCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="FListBill.cs">
+    <Compile Include="FBill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FListBill.designer.cs">
-      <DependentUpon>FListBill.cs</DependentUpon>
+    <Compile Include="FBill.Designer.cs">
+      <DependentUpon>FBill.cs</DependentUpon>
     </Compile>
-    <Compile Include="FListImportBook.cs">
+    <Compile Include="FChooseAuthor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FListImportBook.designer.cs">
-      <DependentUpon>FListImportBook.cs</DependentUpon>
+    <Compile Include="FChooseAuthor.Designer.cs">
+      <DependentUpon>FChooseAuthor.cs</DependentUpon>
     </Compile>
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
@@ -116,29 +146,101 @@
     <Compile Include="FLogin.designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FManageCategoryAndAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FManageCategoryAndAuthor.Designer.cs">
+      <DependentUpon>FManageCategoryAndAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FManageCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FManageCustomer.Designer.cs">
+      <DependentUpon>FManageCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FManager.Designer.cs">
+      <DependentUpon>FManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FImportBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FImportBook.Designer.cs">
+      <DependentUpon>FImportBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FListBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListBill.Designer.cs">
+      <DependentUpon>FListBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FManageBookTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FManageBookTitle.Designer.cs">
+      <DependentUpon>FManageBookTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReceipt.designer.cs">
+      <DependentUpon>FReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FReportBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReportBook.Designer.cs">
+      <DependentUpon>FReportBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FReportOwe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FReportOwe.Designer.cs">
+      <DependentUpon>FReportOwe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSearchBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSearchBook.Designer.cs">
+      <DependentUpon>FSearchBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSearchCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSearchCustomer.Designer.cs">
+      <DependentUpon>FSearchCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSystem.Designer.cs">
+      <DependentUpon>FSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="FUpdateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FUpdateAccount.designer.cs">
       <DependentUpon>FUpdateAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="FUpdateAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FUpdateAuthor.designer.cs">
+      <DependentUpon>FUpdateAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FUpdateBookTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FUpdateBookTitle.designer.cs">
+      <DependentUpon>FUpdateBookTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="FUpdateCategory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FUpdateCategory.designer.cs">
       <DependentUpon>FUpdateCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FManager.designer.cs">
-      <DependentUpon>FManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FUpdateBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FUpdateBook.designer.cs">
-      <DependentUpon>FUpdateBook.cs</DependentUpon>
     </Compile>
     <Compile Include="FUpdateCustomer.cs">
       <SubType>Form</SubType>
@@ -148,77 +250,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UCAdmin.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCAdmin.designer.cs">
-      <DependentUpon>UCAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCBill.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCBill.designer.cs">
-      <DependentUpon>UCBill.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCCollectMoney.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCCollectMoney.designer.cs">
-      <DependentUpon>UCCollectMoney.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCDefault.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCDefault.designer.cs">
-      <DependentUpon>UCDefault.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCImportBook.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCImportBook.designer.cs">
-      <DependentUpon>UCImportBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCManageBook.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCManageBook.designer.cs">
-      <DependentUpon>UCManageBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCManageCategory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCManageCategory.designer.cs">
-      <DependentUpon>UCManageCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCManageCustomer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCManageCustomer.designer.cs">
-      <DependentUpon>UCManageCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCReportCount.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCReportCount.designer.cs">
-      <DependentUpon>UCReportCount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCReportOwe.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCReportOwe.designer.cs">
-      <DependentUpon>UCReportOwe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCSystem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCSystem.designer.cs">
-      <DependentUpon>UCSystem.cs</DependentUpon>
-    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="FAccount.resx">
+      <DependentUpon>FAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FAddAccount.resx">
       <DependentUpon>FAddAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FAddBook.resx">
-      <DependentUpon>FAddBook.cs</DependentUpon>
+    <EmbeddedResource Include="FAddAuthor.resx">
+      <DependentUpon>FAddAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FAddBookTitle.resx">
+      <DependentUpon>FAddBookTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FAddCategory.resx">
       <DependentUpon>FAddCategory.cs</DependentUpon>
@@ -226,26 +269,62 @@
     <EmbeddedResource Include="FAddCustomer.resx">
       <DependentUpon>FAddCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FBill.resx">
+      <DependentUpon>FBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FChooseAuthor.resx">
+      <DependentUpon>FChooseAuthor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FListBill.resx">
       <DependentUpon>FListBill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FListImportBook.resx">
-      <DependentUpon>FListImportBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FUpdateAccount.resx">
-      <DependentUpon>FUpdateAccount.cs</DependentUpon>
+    <EmbeddedResource Include="FManageCategoryAndAuthor.resx">
+      <DependentUpon>FManageCategoryAndAuthor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FUpdateCategory.resx">
-      <DependentUpon>FUpdateCategory.cs</DependentUpon>
+    <EmbeddedResource Include="FManageCustomer.resx">
+      <DependentUpon>FManageCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FManager.resx">
       <DependentUpon>FManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FUpdateBook.resx">
-      <DependentUpon>FUpdateBook.cs</DependentUpon>
+    <EmbeddedResource Include="FImportBook.resx">
+      <DependentUpon>FImportBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FManageBookTitle.resx">
+      <DependentUpon>FManageBookTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FReceipt.resx">
+      <DependentUpon>FReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FReportBook.resx">
+      <DependentUpon>FReportBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FReportOwe.resx">
+      <DependentUpon>FReportOwe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSearchBook.resx">
+      <DependentUpon>FSearchBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSearchCustomer.resx">
+      <DependentUpon>FSearchCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSystem.resx">
+      <DependentUpon>FSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUpdateAccount.resx">
+      <DependentUpon>FUpdateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUpdateAuthor.resx">
+      <DependentUpon>FUpdateAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUpdateBookTitle.resx">
+      <DependentUpon>FUpdateBookTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUpdateCategory.resx">
+      <DependentUpon>FUpdateCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FUpdateCustomer.resx">
       <DependentUpon>FUpdateCustomer.cs</DependentUpon>
@@ -259,39 +338,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UCAdmin.resx">
-      <DependentUpon>UCAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCBill.resx">
-      <DependentUpon>UCBill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCCollectMoney.resx">
-      <DependentUpon>UCCollectMoney.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCDefault.resx">
-      <DependentUpon>UCDefault.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCImportBook.resx">
-      <DependentUpon>UCImportBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCManageBook.resx">
-      <DependentUpon>UCManageBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCManageCategory.resx">
-      <DependentUpon>UCManageCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCManageCustomer.resx">
-      <DependentUpon>UCManageCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCReportCount.resx">
-      <DependentUpon>UCReportCount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCReportOwe.resx">
-      <DependentUpon>UCReportOwe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCSystem.resx">
-      <DependentUpon>UCSystem.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -306,72 +353,42 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1%281%29.jpg" />
-    <Content Include="Resources\1_qWniNvDlEXtxWEo_v8JOZQ.jpeg" />
-    <Content Include="Resources\aaa.jpg" />
-    <Content Include="Resources\Add Book_48px.png" />
-    <Content Include="Resources\Add File_48px.png" />
-    <Content Include="Resources\Add List_48px.png" />
-    <Content Include="Resources\Add New_48px.png" />
-    <Content Include="Resources\Add User Male_48px.png" />
-    <Content Include="Resources\bannerx0x0x2.jpg" />
-    <Content Include="Resources\Borrow Book_48px.png" />
-    <Content Include="Resources\Cancel_48px.png" />
-    <Content Include="Resources\Cancel_50px.png" />
-    <Content Include="Resources\cart.png" />
-    <Content Include="Resources\Check Book_48px.png" />
-    <Content Include="Resources\Course_40px.png" />
-    <Content Include="Resources\Database_16px.png" />
-    <Content Include="Resources\Delete Document_48px.png" />
-    <Content Include="Resources\Delete File_48px.png" />
-    <Content Include="Resources\delete-file.png" />
-    <Content Include="Resources\Denied_48px.png" />
-    <Content Include="Resources\depositphotos_125361876-stock-photo-login-concept-3d-illustration.jpg" />
-    <Content Include="Resources\depositphotos_70278805-stock-illustration-login-button-icon.jpg" />
-    <Content Include="Resources\Edit File_48px.png" />
-    <Content Include="Resources\Edit Profile_48px.png" />
-    <Content Include="Resources\Edit Property_48px.png" />
-    <Content Include="Resources\Exit_48px.png" />
-    <Content Include="Resources\Gallery_48px.png" />
-    <Content Include="Resources\images %281%29.png" />
-    <Content Include="Resources\images.jpg" />
-    <Content Include="Resources\images.png" />
-    <Content Include="Resources\img_258083.png" />
-    <Content Include="Resources\Key_50px.png" />
-    <Content Include="Resources\Lock-icon.png" />
-    <Content Include="Resources\Login-Button-715x300.jpg" />
-    <Content Include="Resources\Login-icon.png" />
-    <Content Include="Resources\login.png" />
-    <Content Include="Resources\Login_50px.png" />
-    <Content Include="Resources\Manager_48px.png" />
-    <Content Include="Resources\Minimize Window_48px.png" />
-    <Content Include="Resources\New Ticket_48px.png" />
-    <Content Include="Resources\novo-documento_318-28764.jpg" />
-    <Content Include="Resources\Open Book_50px.png" />
-    <Content Include="Resources\Padlock_48px.png" />
-    <Content Include="Resources\Padlock_50px.png" />
-    <Content Include="Resources\Password 1_50px.png" />
-    <Content Include="Resources\Password_48px.png" />
-    <Content Include="Resources\Password_50px.png" />
-    <Content Include="Resources\Purchase Order_48px.png" />
-    <Content Include="Resources\Registration_48px.png" />
-    <Content Include="Resources\Remove Book_48px.png" />
-    <Content Include="Resources\sach-hay-ve-suc-khoe-nen-doc.jpg" />
-    <Content Include="Resources\save.png" />
-    <Content Include="Resources\Save_48px.png" />
-    <Content Include="Resources\Search_48px.png" />
-    <Content Include="Resources\Search_50px.png" />
-    <Content Include="Resources\Shopping Cart_16px.png" />
-    <Content Include="Resources\Trash_48px.png" />
-    <Content Include="Resources\TXT_48px.png" />
-    <Content Include="Resources\Untitled.png" />
-    <Content Include="Resources\Untitled1.png" />
-    <Content Include="Resources\User Shield_48px.png" />
-    <Content Include="Resources\User_40px.png" />
-    <Content Include="Resources\User_48px.png" />
-    <Content Include="Resources\User_501px.png" />
-    <Content Include="Resources\User_50px.png" />
-    <Content Include="Resources\User_With_Frame.png" />
+    <Content Include="itextsharp.dll" />
+    <Content Include="Resources\account_avatar_human_male_man_men_people_person_profile_user_users_icon_512.png" />
+    <Content Include="Resources\book-icon-blue-background-vector-free-vector-in-adobe-illustrator-ai-3.png" />
+    <Content Include="Resources\Close Window_26px.png" />
+    <Content Include="Resources\Close Window_50px.png" />
+    <Content Include="Resources\Double Down_16px.png" />
+    <Content Include="Resources\f4408a5c77ebaa90931ba19539718bb2.jpg" />
+    <Content Include="Resources\gear-1077550_960_720.png" />
+    <Content Include="Resources\mau-slide-powerpoint-dep-031.png" />
+    <Content Include="Resources\Maximize Window_48px.png" />
+    <Content Include="Resources\my-journal-powerpoint-backgrounds.jpg" />
+    <Content Include="Resources\school-education-powerpoint-templates-presentation-9365-ppt-background-images-coloring-download-as-zip-4f.jpg" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -53,15 +53,18 @@ namespace QuanLyNhaSach
             string userName = txbUserName.Text;
             string passWord = txbPassWord.Text;
             string displayName = txbDisplayName.Text;
-            int type = 1;
-            if (AccountDAO.Instance.InsertAccount(userName, displayName, passWord, type))
+            try
             {
-                MessageBox.Show("Thêm tài khoản thành công !");
-                if (updateListAccount != null)
-                    updateListAccount(this, new EventArgs());
+                if (AccountDAO.Instance.InsertAccount(userName, displayName, passWord))
+                {
+                    MessageBox.Show("Thêm tài khoản thành công !");
+                    if (updateListAccount != null)
+                        updateListAccount(this, new EventArgs());
+                }
+                else
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không hợp lệ ");
             }
-            else
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không hợp lệ ");
+            catch { MessageBox.Show("Lỗi tài khoản mới thêm đã có ");}
         }
 
         private void txbUserName_TextChanged(object sender, EventArgs e)
