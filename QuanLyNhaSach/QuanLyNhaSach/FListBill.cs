@@ -83,9 +83,16 @@ namespace QuanLyNhaSach
                     ExportDataToPDF.Instance.GetPhrase("Ngày lập: "+ dtgvListBill.SelectedRows[0].Cells["date"].Value.ToString()+'\n'),
                     ExportDataToPDF.Instance.GetPhrase("Tổng tiền: "+dtgvListBill.SelectedRows[0].Cells["value"].Value.ToString()+'\n'),
                 };
-                ExportDataToPDF.Instance.ExportDataToPdf(name, data, ExportDataToPDF.Instance.GetTable(dtgvListBillInfo));
-                if (MessageBox.Show("In thành công ! Bạn có muốn mở file ?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    Process.Start(name);
+                string path=ExportDataToPDF.Instance.ExportDataToPdf(name, data, ExportDataToPDF.Instance.GetTable(dtgvListBillInfo));
+                if (path != "")
+                {
+                    if (MessageBox.Show("In thành công ! Bạn có muốn mở file ?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        Process.Start(path);
+                }
+                else
+                {
+                    MessageBox.Show("In thất bại !", "Thông báo");
+                }
             }
             catch { MessageBox.Show("In thất bại ", "Thông báo"); }
         }
