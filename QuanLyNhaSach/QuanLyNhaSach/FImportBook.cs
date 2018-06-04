@@ -55,6 +55,11 @@ namespace QuanLyNhaSach
             dtgvImportBook.EditingControlShowing += dtgvImportBook_EditingControlShowing;
             dtgvImportBook.RowsAdded += dtgvImportBook_RowsAdded;
             dtgvImportBook.RowsRemoved += dtgvImportBook_RowsRemoved;
+
+            dtgvImportBook.Sorted += delegate (object _sender, EventArgs _e)
+            {
+                LoadSTT();
+            };
         }
         public void LoadSTT()
         {

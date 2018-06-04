@@ -42,6 +42,22 @@ namespace QuanLyNhaSach
             }
 
             dtgvListBill.CellClick += dtgvListBill_CellClick;
+
+            dtgvListBill.Sorted += delegate (object _sender, EventArgs _e)
+            {
+                for (int i = 0; i < dtgvListBill.Rows.Count; i++)
+                {
+                    dtgvListBill.Rows[i].Cells["STT"].Value = i + 1;
+                }
+            };
+
+            dtgvListBillInfo.Sorted += delegate (object _sender, EventArgs _e)
+            {
+                for (int i = 0; i < dtgvListBillInfo.Rows.Count; i++)
+                {
+                    dtgvListBillInfo.Rows[i].Cells["STT2"].Value = i + 1;
+                }
+            };
         }
 
         private void dtgvListBill_CellClick(object sender, DataGridViewCellEventArgs e)

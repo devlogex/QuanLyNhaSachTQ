@@ -51,6 +51,11 @@ namespace QuanLyNhaSach
             dtgvBill.EditingControlShowing += dtgvBill_EditingControlShowing;
             dtgvBill.RowsAdded += dtgvBill_RowsAdded;
             dtgvBill.RowsRemoved += dtgvBill_RowsRemoved;
+
+            dtgvBill.Sorted += delegate (object _sender, EventArgs _e)
+            {
+                LoadSTT();
+            };
         }
 
         private void LoadListCustomerIntoCombobox()
