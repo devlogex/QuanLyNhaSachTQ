@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuanLyNhaSach.DAO
 {
@@ -28,81 +29,90 @@ namespace QuanLyNhaSach.DAO
         public DataTable ExecuteQuery(string query, object[] paramater=null)
         {
             DataTable data = new DataTable();
-
-            using (SqlConnection connection = new SqlConnection(connectionStr))
+            try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                if(paramater != null)
+                using (SqlConnection connection = new SqlConnection(connectionStr))
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach(string item in listPara)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    if (paramater != null)
                     {
-                        if(item.Contains('@'))
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
                         {
-                            command.Parameters.AddWithValue(item,paramater[i]);
-                            i++;
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, paramater[i]);
+                                i++;
+                            }
                         }
                     }
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(data);
+                    connection.Close();
                 }
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(data);
-                connection.Close();
             }
+            catch { MessageBox.Show("Lỗi truy vấn " + query); }
             return data;
         }
 
         public int ExecuteNonQuery(string query, object[] paramater = null)
         {
             int data = 0;
-
-            using (SqlConnection connection = new SqlConnection(connectionStr))
+            try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                if (paramater != null)
+                using (SqlConnection connection = new SqlConnection(connectionStr))
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    if (paramater != null)
                     {
-                        if (item.Contains('@'))
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
                         {
-                            command.Parameters.AddWithValue(item, paramater[i]);
-                            i++;
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, paramater[i]);
+                                i++;
+                            }
                         }
                     }
+                    data = command.ExecuteNonQuery();
+                    connection.Close();
                 }
-                data=command.ExecuteNonQuery();
-                connection.Close();
             }
+            catch { MessageBox.Show("Lỗi truy vấn " + query); }
             return data;
         }
         public object ExecuteScalar(string query, object[] paramater = null)
         {
             object data = new object();
-
-            using (SqlConnection connection = new SqlConnection(connectionStr))
+            try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                if (paramater != null)
+                using (SqlConnection connection = new SqlConnection(connectionStr))
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    if (paramater != null)
                     {
-                        if (item.Contains('@'))
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
                         {
-                            command.Parameters.AddWithValue(item, paramater[i]);
-                            i++;
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, paramater[i]);
+                                i++;
+                            }
                         }
                     }
+                    data = command.ExecuteScalar();
+                    connection.Close();
                 }
-                data = command.ExecuteScalar();
-                connection.Close();
             }
+            catch { MessageBox.Show("Lỗi truy vấn " + query); }
             return data;
         }
     }
